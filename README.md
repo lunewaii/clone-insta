@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# Clone Instagram
+Esse é meu primeiro projeto usando React. Vou desenvolvendo e aprendendo junto!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
