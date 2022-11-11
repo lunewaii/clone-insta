@@ -1,23 +1,38 @@
+import React, { useState, useEffect } from 'react';
+
 import logo from './logo.svg';
 import './App.css';
 
+import { db } from './firebase';
+
 function App() {
+
+  var [numero, setNumero] = useState(0);
+
+  // useEffect(()=>{ //toda vez que o que estiver entre [] for alterado, vai fazer o que tiver dentro
+  //   console.log(numero);
+  // },[numero]);
+
+  // function soma(){
+  //   setNumero(13);
+  // }
+
+  function soma() {
+    setNumero(numero+1);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      {/* <button onClick={() => soma()}>
+        Click me
+      </button> */}
+      <p>
+        You clicked {numero} times
+      </p>
+      <button onClick={() => soma()}>
+        Click me
+      </button>
     </div>
   );
 }
