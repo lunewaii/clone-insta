@@ -28,10 +28,10 @@ function App() {
         Click me
       </button> */}
       <p>
-        You clicked {numero} times
+        Você clicou {numero} vezes
       </p>
       <button onClick={() => soma()}>
-        Click me
+        Clique aqui
       </button>
     </div>
   );
