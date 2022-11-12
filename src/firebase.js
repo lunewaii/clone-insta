@@ -15,8 +15,8 @@ const firebaseApp = initializeApp ({
   });
 
 const db = getFirestore();
-const auth = getAuth();
-const storage = getStorage();
+const auth = getAuth(); //login
+const storage = getStorage(); //upload de arquivos
 const functions = getFunctions();
 
 export {db, auth, storage, functions};
