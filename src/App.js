@@ -14,10 +14,10 @@ function App() {
   //   console.log(numero);
   // },[numero]);
 
-  const [userEvent, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(()=>{
-    console.log(db);
+    
   },[])
 
   return (
@@ -29,14 +29,20 @@ function App() {
             <a href=''><img src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png'/></a>
           </div>
 
-          <div className='headerLoginForm'>
+          {
+            // isso pode ser testado mudando o useState(null) para qualquer coisa (entre `` ou "")
+            (user)?
+            <div>olá :)</div>
+            :
+            <div className='headerLoginForm'>
             <form>
               <input type='text' placeholder='usuário'/>
               <input type='password' placeholder='senha'/>
               <input type='submit' placeholder='login'/>
             </form>
-
           </div>
+          }
+
         </div>
         </div>
 
