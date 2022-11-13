@@ -22,25 +22,25 @@ function App() {
 
   return (
     <div className="App">
-  
       <div className='app'>
         <div className='header'>
-
+        <div className='center'>
           <div className='headerLogo'>
             <a href=''><img src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png'/></a>
           </div>
 
           <div className='headerLoginForm'>
             <form>
-              <input type='text' placeholder='telefone, nome de usuário ou email'/>
+              <input type='text' placeholder='usuário'/>
               <input type='password' placeholder='senha'/>
               <input type='submit' placeholder='login'/>
             </form>
 
           </div>
         </div>
-      </div>
+        </div>
 
+      </div>
     </div>
   );
 }

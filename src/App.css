@@ -4,11 +4,48 @@
     box-sizing: border-box;
 }
 
-.body{
+body{
     background-color: rgb(220, 220, 220)
 }
 
+.center{
+    display: flex;
+    /* para centralizar tudo: */
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
 .header{
+    padding: 15px;
     background-color: white;
     border-bottom: 3px solid rgb(230, 230, 230);
+}
+
+.headerLogo{
+    width: 50%;
+}
+
+.headerLoginForm{
+    width: 50%;
+    text-align: right;
+}
+
+.headerLoginForm input[type=text],
+.headerLoginForm input[type=password]{
+    width: 200px;
+    height: 25px;
+    border: 2px solid #ccc;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 100px;
+    padding-left: 20px;
+}
+
+.headerLoginForm input[type=submit]{
+    cursor: pointer;
+    background-color: #0095f6;
+    width: 70px;
+    height: 25px;
+    border: 2px;
+    border-radius: 100px;
 }
