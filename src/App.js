@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import logo from './logo.svg';
 import './App.css';
-
+import Header from './Header';
 import { db } from './firebase';
 import userEvent from '@testing-library/user-event';
 
@@ -14,39 +14,13 @@ function App() {
   //   console.log(numero);
   // },[numero]);
 
-  const [user, setUser] = useState(null);
+  useEffect(() => {
 
-  useEffect(()=>{
-    
-  },[])
+  }, [])
 
   return (
     <div className="App">
-      <div className='app'>
-        <div className='header'>
-        <div className='center'>
-          <div className='headerLogo'>
-            <a href=''><img src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png'/></a>
-          </div>
-
-          {
-            // isso pode ser testado mudando o useState(null) para qualquer coisa (entre `` ou "")
-            (user)?
-            <div>olá :)</div>
-            :
-            <div className='headerLoginForm'>
-            <form>
-              <input type='text' placeholder='usuário'/>
-              <input type='password' placeholder='senha'/>
-              <input type='submit' placeholder='login'/>
-            </form>
-          </div>
-          }
-
-        </div>
-        </div>
-
-      </div>
+      <Header></Header>
     </div>
   );
 }

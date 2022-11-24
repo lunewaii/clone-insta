@@ -1,52 +1,76 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     vertical-align: middle;
 }
 
-body{
+body {
     background-color: rgb(220, 220, 220)
 }
 
-.center{
+.center {
     display: flex;
     /* para centralizar tudo: */
     margin: 0 auto;
     max-width: 1100px;
 }
 
-.header{
+.header {
     padding: 15px;
     background-color: white;
     border-bottom: 3px solid rgb(230, 230, 230);
 }
 
-.headerLogo{
+.headerLogo {
     width: 50%;
 }
 
-.headerLoginForm{
+.headerLoginForm {
     width: 50%;
     text-align: right;
 }
 
 .headerLoginForm input[type=text],
-.headerLoginForm input[type=password]{
+.headerLoginForm input[type=password] {
     width: 200px;
     height: 25px;
     border: 2px solid #ccc;
     padding: 5px;
-    margin-right: 10px;
+    margin-right: 15px;
     border-radius: 100px;
     padding-left: 20px;
 }
 
-.headerLoginForm input[type=submit]{
+.headerLoginForm input[type=submit] {
     cursor: pointer;
     background-color: #0095f6;
     width: 70px;
     height: 25px;
     border: 2px;
     border-radius: 100px;
+}
+
+.btn_criarConta {
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.header_logado {
+    text-align: right;
+    width: 50%;
+}
+
+.header_logado a {
+    /* isso faz nao ficar com a linha chata embaixo! */
+    text-decoration: none;
+    color: #ccc;
+    font-weight: bold;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #0095f6;
+    width: 70px;
+    height: 25px;
+    border-radius: 15px;
+    padding: 5px;
 }
