@@ -3,8 +3,15 @@ import React, { useState, useEffect } from 'react';
 function Header(props) {
 
     useEffect(() => {
-        props.setUser('Gabriel');
+        props.setUser('a');
     }, [])
+
+
+    function abrirModalCreate(a){
+        a.preventDefault();
+        alert('criar conta :o');
+    }
+
 
     return (
 
@@ -30,7 +37,7 @@ function Header(props) {
                                     <input type='submit' placeholder='login' />
                                 </form>
                                 <div className='btn_criarConta'>
-                                    <a href=''>Criar conta</a>
+                                    <a onClick={(a) =>abrirModalCreate(a)} href=''>Criar conta</a>
                                 </div>
                             </div>
                     }
