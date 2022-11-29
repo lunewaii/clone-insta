@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { getStorage } from "firebase/storage";
-import { getAuth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFunctions } from "firebase/functions";
 
 const firebaseApp = initializeApp ({
@@ -19,4 +19,4 @@ const auth = getAuth(); //login
 const storage = getStorage(); //upload de arquivos
 const functions = getFunctions();
 
-export {db, auth, storage, functions};
+export {db, auth, createUserWithEmailAndPassword, updateProfile, storage, functions};

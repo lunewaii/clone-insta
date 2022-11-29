@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { auth } from './firebase';
+import { auth, createUserWithEmailAndPassword, updateProfile } from './firebase';
 
 function Header(props) {
 
@@ -15,15 +15,21 @@ function Header(props) {
         let senha = document.getElementById('senha-cadastro').value;
 
         // alert('conta criada, ihu');
-        auth.createUserWithEmailAndPassword(email,senha)
-            .then((authUser) => {
-                authUser.user.updateProfile({
-                    displayName:username
+        createUserWithEmailAndPassword(auth,email,senha)
+            .then((userCredential) => {
+                console.log(userCredential);
+                updateProfile(userCredential.user, {
+                    displayName: username
                 })
                 alert('conta criada com sucesso');
                 let modal = document.querySelector('.modalCreate');
 
                 modal.style.display = "none";
+
+                document.getElementById('email-cadastro').value = "";
+                document.getElementById('username-cadastro').value = "";
+                document.getElementById('senha-cadastro').value = "";
+
             }).catch((error) => {
                 alert(error.message);
             });
