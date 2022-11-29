@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import logo from './logo.svg';
 import './App.css';
 import Header from './Header';
 import { db } from './firebase';
