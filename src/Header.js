@@ -1,3 +1,4 @@
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import { auth, createUserWithEmailAndPassword, updateProfile } from './firebase';
 
@@ -33,6 +34,24 @@ function Header(props) {
             }).catch((error) => {
                 alert(error.message);
             });
+    }
+
+    function logar(a){
+        const auth = getAuth();
+        a.preventDefault();
+
+        let email = document.getElementById('email-login').value;
+        let senha = document.getElementById('senha-login').value;
+
+        signInWithEmailAndPassword(auth, email, senha)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user);
+            props.setUser(user.displayName);
+            alert('logado com sucesso!');
+        }).catch((erro) => {
+            alert(erro.message);
+        })
     }
 
     function abrirModalCreate(a){
@@ -81,9 +100,9 @@ function Header(props) {
                             </div>
                             :
                             <div className='headerLoginForm'>
-                                <form>
-                                    <input type='text' placeholder='usuário' />
-                                    <input type='password' placeholder='senha' />
+                                <form onSubmit={(a) => logar(a)}>
+                                    <input id='email-login' type='text' placeholder='email' />
+                                    <input id='senha-login' type='password' placeholder='senha' />
                                     <input type='submit' placeholder='login' />
                                 </form>
                                 <div className='btn_criarConta'>
