@@ -54,6 +54,7 @@ body {
 
 .headerLoginForm a{
     text-decoration: none;
+    cursor: pointer;
 }
 
 .btn_criarConta {

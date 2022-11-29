@@ -13,7 +13,7 @@ function App() {
   //   console.log(numero);
   // },[numero]);
 
-  const [user, setUser] = useState(`Rebeca`);
+  const [user, setUser] = useState();
 
   useEffect(() => {
 

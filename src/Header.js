@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {auth} from './firebase';
+import { auth } from './firebase';
 
 function Header(props) {
 
     useEffect(() => {
-        props.setUser('');
+        
     }, [])
 
     function criarConta(a){
@@ -15,22 +15,23 @@ function Header(props) {
         let senha = document.getElementById('senha-cadastro').value;
 
         // alert('conta criada, ihu');
-        auth.createUserWithEmailAndPassword(email,senha).then((authUser) => {
-            authUser.user.updateProfile({
-                displayName:username
-            })
-            alert('conta criada com sucesso');
-            let modal = document.querySelector('.modalCreate');
+        auth.createUserWithEmailAndPassword(email,senha)
+            .then((authUser) => {
+                authUser.user.updateProfile({
+                    displayName:username
+                })
+                alert('conta criada com sucesso');
+                let modal = document.querySelector('.modalCreate');
 
-            modal.style.display = "none";
-        }).catch((error) => {
-            alert(error.message);
-        });
+                modal.style.display = "none";
+            }).catch((error) => {
+                alert(error.message);
+            });
     }
 
     function abrirModalCreate(a){
         a.preventDefault();
-        
+
         let modal = document.querySelector('.modalCreate');
 
         modal.style.display = "block";
@@ -62,7 +63,7 @@ function Header(props) {
 
                 <div className='center'>
                     <div className='headerLogo'>
-                        <a href=''><img src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png' /></a>
+                        <a href=""><img src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png' /></a>
                     </div>
 
                     {
@@ -70,7 +71,7 @@ function Header(props) {
                         (props.user) ?
                             <div className='header_logado'>
                                 olá {props.user} :)
-                                <a href=''>postar</a>
+                                <a href='#'>postar</a>
                             </div>
                             :
                             <div className='headerLoginForm'>
@@ -80,7 +81,7 @@ function Header(props) {
                                     <input type='submit' placeholder='login' />
                                 </form>
                                 <div className='btn_criarConta'>
-                                    <a onClick={(a) =>abrirModalCreate(a)} href=''>Criar conta</a>
+                                    <a onClick={(a) => abrirModalCreate(a)} href='#'>Criar conta</a>
                                 </div>
                             </div>
                     }
