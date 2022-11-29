@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-function Header() {
+function Header(props) {
 
-    const [user, setUser] = useState(`Rebeca`);
+    useEffect(() => {
+        props.setUser('Gabriel');
+    }, [])
 
     return (
 
@@ -15,9 +17,9 @@ function Header() {
 
                     {
                         // isso pode ser testado mudando o useState(null) para qualquer coisa (entre `` ou "")
-                        (user) ?
+                        (props.user) ?
                             <div className='header_logado'>
-                                olá {user} :)
+                                olá {props.user} :)
                                 <a href=''>postar</a>
                             </div>
                             :

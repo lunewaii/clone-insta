@@ -14,13 +14,15 @@ function App() {
   //   console.log(numero);
   // },[numero]);
 
+  const [user, setUser] = useState(`Rebeca`);
+
   useEffect(() => {
 
   }, [])
 
   return (
     <div className="App">
-      <Header></Header>
+      <Header setUser={setUser} user={user}></Header>
     </div>
   );
 }

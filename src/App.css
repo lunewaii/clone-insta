@@ -51,6 +51,10 @@ body {
     border-radius: 100px;
 }
 
+.headerLoginForm a{
+    text-decoration: none;
+}
+
 .btn_criarConta {
     font-size: 15px;
     margin-top: 5px;
@@ -64,7 +68,7 @@ body {
 .header_logado a {
     /* isso faz nao ficar com a linha chata embaixo! */
     text-decoration: none;
-    color: #ccc;
+    color: #ffffff;
     font-weight: bold;
     margin: 0 10px;
     cursor: pointer;
