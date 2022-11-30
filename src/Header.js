@@ -33,6 +33,7 @@ function Header(props) {
 
             }).catch((error) => {
                 alert(error.message);
+                console.log(error);
             });
     }
 
@@ -50,7 +51,22 @@ function Header(props) {
             props.setUser(user.displayName);
             alert('logado com sucesso!');
         }).catch((erro) => {
-            alert(erro.message);
+            let {message, code} = erro;
+            
+            switch (code) {
+                case "auth/user-not-found":
+                    console.log("num achei ele :(");
+                    break;
+                case "auth/wrong-password":
+                    console.log("n conheço essa senha :/ tenta dnv vai");
+                    break;
+                default:
+                    console.log("num tendi uq acontseu >:(");
+                    break;
+            }
+            console.log("Codigo do erro: " + code);
+            // alert(erro.message);
+            // console.log(erro.code);
         })
     }
 
