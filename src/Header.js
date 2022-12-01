@@ -40,7 +40,7 @@ function Header(props) {
                 setProgress(0);
                 setFile(null);
     
-                alert('upload realizado com sucesso!');
+                alert('upload foi realizado com sucesso!');
     
                 document.getElementById('formUpload').reset();
             })
