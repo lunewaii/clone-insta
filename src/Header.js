@@ -2,43 +2,74 @@ import { FirebaseError } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import { auth, createUserWithEmailAndPassword, updateProfile, storage, db } from './firebase';
-import { getStorage, ref } from "firebase/storage";
 
 function Header(props) {
-
+    
     const [progress, setProgress] = useState(0); //useState que começa em 0
-
+    
     const [file, setFile] = useState(null);
-
-    const storage = getStorage();
-
+    
     useEffect(() => {
         
     }, [])
-
+    
+    function uploadPost(a){
+        a.preventDefault();
+        let legenda = document.getElementById('legenda').value;
+        let progressPost = document.getElementById('progressPost');
+    
+        // storage.ref = criando referencia pra imagem que vai postar. faz o upload do (file) usando .put
+        const uploadTask = storage.ref('images/${file.name}').put(file);
+    
+        uploadTask.on('state_changes', function(snapshot){
+          const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+    
+          setProgress(progress);
+        }, function(error){
+            alert('erro');
+        }, function(){
+            storage.ref('images').child(file.name).getDownloadURL().then(function(url){
+                //pega a coleçao posts no bando de dados (db). se existir, vai inserir. se não, vai criar
+                db.collection('posts').add({
+                    legenda: legenda,
+                    image: url,
+                    username: props.user,
+                    // timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                })
+    
+                setProgress(0);
+                setFile(null);
+    
+                alert('upload realizado com sucesso!');
+    
+                document.getElementById('formUpload').reset();
+            })
+        })
+    }
+    
     function criarConta(a){
         a.preventDefault();
-
+        
         let email = document.getElementById('email-cadastro').value;
         let username = document.getElementById('username-cadastro').value;
         let senha = document.getElementById('senha-cadastro').value;
 
         // alert('conta criada, ihu');
         createUserWithEmailAndPassword(auth,email,senha)
-            .then((userCredential) => {
+        .then((userCredential) => {
                 console.log(userCredential);
                 updateProfile(userCredential.user, {
                     displayName: username
                 })
                 alert('conta criada com sucesso');
                 let modal = document.querySelector('.modalCreate');
-
+                
                 modal.style.display = "none";
 
                 document.getElementById('email-cadastro').value = "";
                 document.getElementById('username-cadastro').value = "";
                 document.getElementById('senha-cadastro').value = "";
-
+                
             }).catch((error) => {
                 alert(error.message);
                 console.log(error);
@@ -107,39 +138,6 @@ function Header(props) {
         modal.style.display = "none";
     }
 
-    function uploadPost(a){
-        a.preventDefault();
-        let legenda = document.getElementById('legenda').value;
-        let progressPost = document.getElementById('progressPost');
-
-        // storage.ref = criando referencia pra imagem que vai postar. faz o upload do (file) usando .put
-        const uploadTask = storage.ref('images/${file.name}').put(file);
-
-        uploadTask.on('state_changes', function(snapshot){
-          const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes) * 100;
-
-          setProgress(progress);
-        }, function(error){
-            alert('erro');
-        }, function(){
-            storage.ref('images').child(file.name).getDownloadURL().then(function(url){
-                //pega a coleçao posts no bando de dados (db). se existir, vai inserir. se não, vai criar
-                db.collection('posts').add({
-                    legenda: legenda,
-                    image: url,
-                    username: props.user,
-                    // timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                })
-
-                setProgress(0);
-                setFile(null);
-
-                alert('upload realizado com sucesso!');
-
-                document.getElementById('formUpload').reset();
-            })
-        })
-    }
 
     return (
 
