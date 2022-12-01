@@ -4,31 +4,31 @@ import React, { useState, useEffect } from 'react';
 import { auth, createUserWithEmailAndPassword, updateProfile, storage, db } from './firebase';
 
 function Header(props) {
-    
+
     const [progress, setProgress] = useState(0); //useState que começa em 0
-    
+
     const [file, setFile] = useState(null);
-    
+
     useEffect(() => {
-        
+
     }, [])
 
-    function uploadPost(a){
+    function uploadPost(a) {
         a.preventDefault();
         let legenda = document.getElementById('legenda').value;
         let progressPost = document.getElementById('progressPost');
-    
+
         // storage.ref = criando referencia pra imagem que vai postar. faz o upload do (file) usando .put
         const uploadTask = storage.ref('images/${file.name}').put(file);
-    
-        uploadTask.on('state_changes', function(snapshot){
-          const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes) * 100;
-    
-          setProgress(progress);
-        }, function(error){
+
+        uploadTask.on('state_changes', function (snapshot) {
+            const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+            setProgress(progress);
+        }, function (error) {
             alert(error);
-        }, function(){
-            storage.ref('images').child(file.name).getDownloadURL().then(function(url){
+        }, function () {
+            storage.ref('images').child(file.name).getDownloadURL().then(function (url) {
                 //pega a coleçao posts no bando de dados (db). se existir, vai inserir. se não, vai criar
                 db.collection('posts').add({
                     legenda: legenda,
@@ -36,47 +36,47 @@ function Header(props) {
                     username: props.user,
                     // timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 })
-    
+
                 setProgress(0);
                 setFile(null);
-    
+
                 alert('upload foi realizado com sucesso!');
-    
+
                 document.getElementById('formUpload').reset();
             })
         })
     }
-    
-    function criarConta(a){
+
+    function criarConta(a) {
         a.preventDefault();
-        
+
         let email = document.getElementById('email-cadastro').value;
         let username = document.getElementById('username-cadastro').value;
         let senha = document.getElementById('senha-cadastro').value;
 
         // alert('conta criada, ihu');
-        createUserWithEmailAndPassword(auth,email,senha)
-        .then((userCredential) => {
+        createUserWithEmailAndPassword(auth, email, senha)
+            .then((userCredential) => {
                 console.log(userCredential);
                 updateProfile(userCredential.user, {
                     displayName: username
                 })
                 alert('conta criada com sucesso');
                 let modal = document.querySelector('.modalCreate');
-                
+
                 modal.style.display = "none";
 
                 document.getElementById('email-cadastro').value = "";
                 document.getElementById('username-cadastro').value = "";
                 document.getElementById('senha-cadastro').value = "";
-                
+
             }).catch((error) => {
                 alert(error.message);
                 console.log(error);
             });
     }
 
-    function logar(a){
+    function logar(a) {
         const auth = getAuth();
         a.preventDefault();
 
@@ -84,33 +84,33 @@ function Header(props) {
         let senha = document.getElementById('senha-login').value;
 
         signInWithEmailAndPassword(auth, email, senha)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-            props.setUser(user.displayName);
-            alert('logado com sucesso!');
-        }).catch((erro) => {
-            let {message, code} = erro;
-            
-            //aprendi de novo
-            switch (code) {
-                case "auth/user-not-found":
-                    console.log("num achei ele :(");
-                    break;
-                case "auth/wrong-password":
-                    console.log("n conheço essa senha :/ tenta dnv vai");
-                    break;
-                default:
-                    console.log("num tendi uq acontseu >:(");
-                    break;
-            }
-            console.log("Codigo do erro: " + code);
-            // alert(erro.message);
-            // console.log(erro.code);
-        })
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+                props.setUser(user.displayName);
+                alert('logado com sucesso!');
+            }).catch((erro) => {
+                let { message, code } = erro;
+
+                //aprendi de novo
+                switch (code) {
+                    case "auth/user-not-found":
+                        console.log("num achei ele :(");
+                        break;
+                    case "auth/wrong-password":
+                        console.log("n conheço essa senha :/ tenta dnv vai");
+                        break;
+                    default:
+                        console.log("num tendi uq acontseu >:(");
+                        break;
+                }
+                console.log("Codigo do erro: " + code);
+                // alert(erro.message);
+                // console.log(erro.code);
+            })
     }
 
-    function abrirModalCreate(a){
+    function abrirModalCreate(a) {
         a.preventDefault();
 
         let modal = document.querySelector('.modalCreate');
@@ -118,13 +118,13 @@ function Header(props) {
         modal.style.display = "block";
     }
 
-    function closeModalCreate(){
+    function closeModalCreate() {
         let modal = document.querySelector('.modalCreate');
 
         modal.style.display = "none";
     }
 
-    function criarModalUpload(a){
+    function criarModalUpload(a) {
         a.preventDefault();
 
         let modal = document.querySelector('.modalUpload');
@@ -132,7 +132,7 @@ function Header(props) {
         modal.style.display = "block";
     }
 
-    function closeModalUpload(){
+    function closeModalUpload() {
         let modal = document.querySelector('.modalUpload');
 
         modal.style.display = "none";
@@ -149,10 +149,10 @@ function Header(props) {
                         <div onClick={() => closeModalCreate()} className='close-modalCreate'>X</div>
                         <h2>Criar conta</h2>
                         <form onSubmit={(a) => criarConta(a)}>
-                            <input id='email-cadastro' type="text" placeholder='E-mail'/>
-                            <input id='username-cadastro' type="text" placeholder='Username'/>
-                            <input id='senha-cadastro' type="password" placeholder='Senha'/>
-                            <input type="submit" value="Criar"/>
+                            <input id='email-cadastro' type="text" placeholder='E-mail' />
+                            <input id='username-cadastro' type="text" placeholder='Username' />
+                            <input id='senha-cadastro' type="password" placeholder='Senha' />
+                            <input type="submit" value="Criar" />
                         </form>
                     </div>
                 </div>
@@ -163,10 +163,10 @@ function Header(props) {
                         <h2>Criar postagem</h2>
                         <form id='uploadPost' onSubmit={(a) => uploadPost(a)}>
                             <progress id='progressUpload' value={progress}></progress>
-                            <input id='legenda' type="text" placeholder='Legenda'/>
-                        {/* esse onChange e etc é pra pegar só o último arquivo. aparentemente vou usar muito isso! */}
-                            <input onChange={(a) => setFile(a.target.files[0])} type='file' name='file'/>
-                            <input type="submit" value="Postar"/>
+                            <input id='legenda' type="text" placeholder='Legenda' />
+                            {/* esse onChange e etc é pra pegar só o último arquivo. aparentemente vou usar muito isso! */}
+                            <input onChange={(a) => setFile(a.target.files[0])} type='file' name='file' />
+                            <input type="submit" value="Postar" />
                         </form>
                     </div>
                 </div>
