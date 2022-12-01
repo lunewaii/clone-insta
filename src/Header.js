@@ -12,7 +12,7 @@ function Header(props) {
     useEffect(() => {
         
     }, [])
-    
+
     function uploadPost(a){
         a.preventDefault();
         let legenda = document.getElementById('legenda').value;
@@ -26,7 +26,7 @@ function Header(props) {
     
           setProgress(progress);
         }, function(error){
-            alert('erro');
+            alert(error);
         }, function(){
             storage.ref('images').child(file.name).getDownloadURL().then(function(url){
                 //pega a coleçao posts no bando de dados (db). se existir, vai inserir. se não, vai criar
