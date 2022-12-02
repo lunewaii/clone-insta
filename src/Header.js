@@ -5,48 +5,40 @@ import { auth, createUserWithEmailAndPassword, updateProfile, storage, db } from
 
 function Header(props) {
 
-    const [progress, setProgress] = useState(0); //useState que começa em 0
-
-    const [file, setFile] = useState(null);
-
     useEffect(() => {
 
     }, [])
 
-    function uploadPost(a) {
+    const [progress, setProgress] = useState(0); //useState que começa em 0
+
+    const formHandler = (a) => {
         a.preventDefault();
-        let legenda = document.getElementById('legenda').value;
-        let progressPost = document.getElementById('progressPost');
+        const file = a.target[0].file[0];
+        uploadFiles(file);
+    };
 
-        // storage.ref = criando referencia pra imagem que vai postar. faz o upload do (file) usando .put
-        const uploadTask = storage.ref('images/${file.name}').put(file);
-
-        uploadTask.on('state_changes', function (snapshot) {
-            const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
-            setProgress(progress);
-        }, function (error) {
-            alert(error);
-        }, function () {
-            storage.ref('images').child(file.name).getDownloadURL().then(function (url) {
-                //pega a coleçao posts no bando de dados (db). se existir, vai inserir. se não, vai criar
-                db.collection('posts').add({
-                    legenda: legenda,
-                    image: url,
-                    username: props.user,
-                    // timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                })
-
-                setProgress(0);
-                setFile(null);
-
-                alert('upload foi realizado com sucesso!');
-
-                document.getElementById('formUpload').reset();
-            })
-        })
+    const uploadFiles = (file) => {
+        const uploadTask = storage.ref(`files/$(file.name)`).put(file);
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const prog =  Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                    setProgress(prog);
+            },
+            (error) => console.log(error),
+            () => {
+                storage
+                .ref("files")
+                .child(file.name)
+                .getDownloadURL()
+                .then((url) => {
+                    console.log(url);
+                });
+            }
+        )
     }
-
+    
     function criarConta(a) {
         a.preventDefault();
 
