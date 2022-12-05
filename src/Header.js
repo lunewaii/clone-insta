@@ -1,7 +1,9 @@
 import { FirebaseError } from 'firebase/app';
+import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import { auth, createUserWithEmailAndPassword, updateProfile, storage, db } from './firebase';
+import 'firebase/storage';
 
 function Header(props) {
 
@@ -9,34 +11,69 @@ function Header(props) {
 
     }, [])
 
+    const [file, setFile] = useState(null); 
     const [progress, setProgress] = useState(0); //useState que começa em 0
 
     const formHandler = (a) => {
         a.preventDefault();
-        const file = a.target[0].file[0];
+        console.log(a);
+        // let file = a.target[1].file[0];
         uploadFiles(file);
     };
 
     const uploadFiles = (file) => {
-        const uploadTask = storage.ref(`files/$(file.name)`).put(file);
+        const storageRef = ref(storage, `files/${file.name}`);
+
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        // .then((snapshot) => {
+            
+        //     // console.log(snapshot);
+        //     const prog =  Math.round(
+        //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        //     setProgress(prog);
+            
+        // }).catch((ex) => {
+        //     console.log(ex);
+        // }).finally(() => {
+        //     getDownloadURL(storageRef).then((url) => {
+        //         console.log(url);
+        //     });
+        // });
+
         uploadTask.on(
             "state_changed",
             (snapshot) => {
                 const prog =  Math.round(
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-                    setProgress(prog);
+                setProgress(prog);
             },
             (error) => console.log(error),
             () => {
-                storage
-                .ref("files")
-                .child(file.name)
-                .getDownloadURL()
-                .then((url) => {
+                getDownloadURL(storageRef).then((url) => {
                     console.log(url);
                 });
             }
         )
+
+        // const uploadTask = storage.ref(`files/$(file.name)`).put(file);
+        // uploadTask.on(
+        //     "state_changed",
+        //     (snapshot) => {
+        //         const prog =  Math.round(
+        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        //             setProgress(prog);
+        //     },
+        //     (error) => console.log(error),
+        //     () => {
+        //         storage
+        //         .ref("files")
+        //         .child(file.name)
+        //         .getDownloadURL()
+        //         .then((url) => {
+        //             console.log(url);
+        //         });
+        //     }
+        // )
     }
     
     function criarConta(a) {
@@ -153,7 +190,7 @@ function Header(props) {
                     <div className='formUpload'>
                         <div onClick={() => closeModalUpload()} className='close-modalCreate'>X</div>
                         <h2>Criar postagem</h2>
-                        <form id='uploadPost' onSubmit={(a) => uploadPost(a)}>
+                        <form onSubmit={formHandler}>
                             <progress id='progressUpload' value={progress}></progress>
                             <input id='legenda' type="text" placeholder='Legenda' />
                             {/* esse onChange e etc é pra pegar só o último arquivo. aparentemente vou usar muito isso! */}

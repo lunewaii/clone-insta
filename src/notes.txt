@@ -39,3 +39,10 @@ const [progress, setProgress] = useState(0); //useState que começa em 0
             })
         })
     }
+
+
+
+
+
+
+    <input onChange={(a) => setFile(a.target.files[0])} type='file' name='file' />
