@@ -1,7 +1,9 @@
 import { FirebaseError } from 'firebase/app';
 import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { collection, addDoc, CollectionReference, doc, Firestore, setDoc} from "firebase/firestore"; 
 import React, { useState, useEffect } from 'react';
+import { getFirestore , Timestamp, serverTimestamp } from 'firebase/firestore';
 import { auth, createUserWithEmailAndPassword, updateProfile, storage, db } from './firebase';
 import 'firebase/storage';
 
@@ -22,6 +24,7 @@ function Header(props) {
     };
 
     const uploadFiles = (file) => {
+        let legenda = document.getElementById('legenda').value;
         const storageRef = ref(storage, `files/${file.name}`);
 
         const uploadTask = uploadBytesResumable(storageRef, file);
@@ -51,29 +54,22 @@ function Header(props) {
             () => {
                 getDownloadURL(storageRef).then((url) => {
                     console.log(url);
+                    // novo
+                    let docRef = doc(collection(db, "posts"));
+                    console.log(docRef);
+                    setDoc(docRef, {
+                        legenda: legenda,
+                        image: url,
+                        username: props.user,
+                        timestamp: serverTimestamp()
+                    }).then(() => {
+                        console.log("executado");
+                    }).catch((err) => {
+                        console.log(err);
+                    });
                 });
             }
         )
-
-        // const uploadTask = storage.ref(`files/$(file.name)`).put(file);
-        // uploadTask.on(
-        //     "state_changed",
-        //     (snapshot) => {
-        //         const prog =  Math.round(
-        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        //             setProgress(prog);
-        //     },
-        //     (error) => console.log(error),
-        //     () => {
-        //         storage
-        //         .ref("files")
-        //         .child(file.name)
-        //         .getDownloadURL()
-        //         .then((url) => {
-        //             console.log(url);
-        //         });
-        //     }
-        // )
     }
     
     function criarConta(a) {

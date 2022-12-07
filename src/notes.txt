@@ -27,9 +27,9 @@ const [progress, setProgress] = useState(0); //useState que começa em 0
                     legenda: legenda,
                     image: url,
                     username: props.user,
-                    // timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 })
-    
+     
                 setProgress(0);
                 setFile(null);
     
