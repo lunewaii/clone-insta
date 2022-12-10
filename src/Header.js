@@ -56,6 +56,9 @@ function Header(props) {
                     console.log(url);
                     // novo
                     let docRef = doc(collection(db, "posts"));
+                    let modal = document.querySelector('.modalUpload');
+
+                    modal.style.display = "none";
                     console.log(docRef);
                     setDoc(docRef, {
                         legenda: legenda,
