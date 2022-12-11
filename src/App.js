@@ -37,7 +37,7 @@ function App() {
       console.log("executou");
     });
 
-  }, [ ])
+  }, [ ]);
 
   return (
     <div className="App">
