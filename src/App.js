@@ -5,6 +5,8 @@ import Header from './Header';
 import { db } from './firebase';
 import userEvent from '@testing-library/user-event';
 
+import { collection, CollectionReference, getDocs, orderBy, query } from 'firebase/firestore';
+
 function App() {
 
   //var [numero, setNumero] = useState(0);
@@ -19,13 +21,23 @@ function App() {
 
   useEffect(() => {
 
-    db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(function(snapshot){
-      setPosts(snapshot.docs.map(function(document){
-        return {id:document.id,info:document.data()}
-      }))
-    })
+    let postRef = collection(db, 'posts');
+    let q = query(postRef, orderBy('timestamp', 'desc'));
 
-  }, [])
+    getDocs(q).then((docs) => {
+      setPosts(docs.docs.map((doc) => {
+        return {
+          id: doc.id,
+          info: doc.data()
+        };
+      }));
+    }).catch((ex) => {
+      console.log(ex);
+    }).finally(() => {
+      console.log("executou");
+    });
+
+  }, [ ])
 
   return (
     <div className="App">
@@ -36,7 +48,7 @@ function App() {
         posts.map(function(val){
 
           return (
-            <p>{val.info.legenda}</p>
+            <p key={val.id}>{val.info.legenda}</p>
           )
 
         })
