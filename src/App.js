@@ -50,7 +50,7 @@ function App() {
           return (
             <div className='postsLegImg'>
               <img key={val.id} src={val.info.image}/>
-              <p key={val.id}>{val.info.legenda}</p>
+              <p key={val.id}><b>{val.info.username}</b>:{val.info.legenda}</p>
             </div>
           )
 
