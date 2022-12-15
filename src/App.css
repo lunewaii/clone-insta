@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #BE95C4
+    background-color: #e792bd99
 }
 
 .center {
@@ -45,7 +45,7 @@ body {
 .headerLoginForm input[type=submit] {
     color: #ffffff;
     cursor: pointer;
-    background-color: #5E548E;
+    background-color: #5e548ec8;
     width: 70px;
     height: 25px;
     border: 2px;
@@ -71,13 +71,14 @@ body {
     /* isso faz nao ficar com a linha chata embaixo! */
     text-decoration: none;
     color: #ffffff;
+    font-size: 15px;
     margin: 0 10px;
     cursor: pointer;
-    background-color: #5E548E;
+    background-color: #5e548ec8;
     width: 70px;
     height: 25px;
     border-radius: 100px;
-    padding: 7px;
+    padding: 5px;
 }
 
 .modalCreate {
@@ -118,8 +119,8 @@ body {
 
 .formCreate input[type=submit] {
     cursor: pointer;
-    background-color: #5E548E;
-    border: 1px #5E548E;
+    background-color: #5e548ec8;
+    border: 1px #5e548ec8;
     color: #ffffff;
     width: 30%;
 }
@@ -131,7 +132,7 @@ body {
     cursor: pointer;
     width: 30px;
     text-align: center;
-    background-color: #5E548E;
+    background-color: #5e548ec8;
     color: #ffffff;
     border-radius: 15px;
     line-height: 30px;
@@ -176,8 +177,8 @@ body {
 
 .formUpload input[type=submit] {
     cursor: pointer;
-    background-color: #5E548E;
-    border: 1px #5E548E;
+    background-color: #5e548ec8;
+    border: 1px #5e548ec8;
     color: #ffffff;
     width: 30%;
 }
@@ -194,4 +195,12 @@ body {
     border-radius: 15px;
     line-height: 30px;
 
+}
+
+.postsLegImg{
+    text-align: center;
+}
+
+.postsLegImg img{
+    width: 300px;
 }

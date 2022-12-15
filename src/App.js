@@ -48,7 +48,10 @@ function App() {
         posts.map(function(val){
 
           return (
-            <p key={val.id}>{val.info.legenda}</p>
+            <div className='postsLegImg'>
+              <img key={val.id} src={val.info.image}/>
+              <p key={val.id}>{val.info.legenda}</p>
+            </div>
           )
 
         })
