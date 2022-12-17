@@ -211,3 +211,11 @@ body {
 .postsLegImg p{
     padding: 10px;
 }
+
+.postsLegImg form{
+    padding: 10px;
+}
+
+.postsLegImg textarea{
+    width: 100%;
+}

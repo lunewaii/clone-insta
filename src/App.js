@@ -51,6 +51,10 @@ function App() {
             <div className='postsLegImg'>
               <img key={val.id} src={val.info.image}/>
               <p key={val.id}>{val.info.username}: {val.info.legenda}</p>
+              <form>
+                <textarea></textarea>
+                <input type="submit" value="Comentar"/>
+              </form>
             </div>
           )
 
