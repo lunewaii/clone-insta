@@ -210,6 +210,7 @@ body {
 
 .postsLegImg p{
     padding: 10px;
+    border-left: solid #5e548ec8;
 }
 
 .postsLegImg form{
@@ -218,4 +219,15 @@ body {
 
 .postsLegImg textarea{
     width: 100%;
+}
+
+.postsLegImg input[type=submit]{
+    color: #ffffff;
+    cursor: pointer;
+    background-color: #5e548ec8;
+    width: 15%;
+    height: 25px;
+    border: 2px;
+    border-radius: 100px;
+    margin-top: 5px; 
 }
