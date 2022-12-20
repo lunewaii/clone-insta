@@ -4,6 +4,7 @@ import './App.css';
 import Header from './Header';
 import { db } from './firebase';
 import userEvent from '@testing-library/user-event';
+import Post from './Post';
 
 import { collection, CollectionReference, getDocs, orderBy, query } from 'firebase/firestore';
 
@@ -48,14 +49,7 @@ function App() {
         posts.map(function(val){
 
           return (
-            <div className='postsLegImg'>
-              <img key={val.id} src={val.info.image}/>
-              <p key={val.id}>{val.info.username}: {val.info.legenda}</p>
-              <form>
-                <textarea></textarea>
-                <input type="submit" value="Comentar"/>
-              </form>
-            </div>
+            <Post info={val.info} id={val.id} />
           )
 
         })

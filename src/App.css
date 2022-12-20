@@ -222,12 +222,20 @@ body {
 }
 
 .postsLegImg input[type=submit]{
+    display: block;
+    margin-left: auto;
     color: #ffffff;
     cursor: pointer;
-    background-color: #5e548ec8;
+    background-color: #5e548e;
     width: 15%;
     height: 25px;
     border: 2px;
     border-radius: 100px;
     margin-top: 5px; 
+}
+
+.postsLegImg textarea{
+    height: 80px;
+    border-radius: 5px;
+    border: solid 1px #5e548e;
 }
