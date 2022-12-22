@@ -6,8 +6,11 @@ function Post(props){
 
     function comentar(id, e){
         e.preventDefault();
+
+        let comentarioAtual = document.querySelector('#comentario-'+id).value;
         //futuramente, vou substituir isso por um pop-up:
         alert('comentário feito com sucesso!');
+        alert(comentarioAtual);
     }
 
     return (
