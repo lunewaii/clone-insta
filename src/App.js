@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import './App.css';
 import Header from './Header';
-import { db } from './firebase';
+import { db, auth } from './firebase';
 import userEvent from '@testing-library/user-event';
 import Post from './Post';
 
@@ -21,6 +21,10 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+
+    auth.onAuthStateChanged(function(val){
+      console.log(val);
+    })
 
     let postRef = collection(db, 'posts');
     let q = query(postRef, orderBy('timestamp', 'desc'));
