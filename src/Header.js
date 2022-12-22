@@ -114,9 +114,9 @@ function Header(props) {
         signInWithEmailAndPassword(auth, email, senha)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user);
                 props.setUser(user.displayName);
                 alert('logado com sucesso!');
+                window.location.href= "/";
             }).catch((erro) => {
                 let { message, code } = erro;
 
@@ -136,6 +136,14 @@ function Header(props) {
                 // alert(erro.message);
                 // console.log(erro.code);
             })
+    }
+
+    function deslogar(a){
+        a.preventDefault();
+        auth.signOut().then(function(val){
+            props.setUser(null);
+            window.location.href= "/";
+        })
     }
 
     function abrirModalCreate(a) {
@@ -210,6 +218,7 @@ function Header(props) {
                             <div className='header_logado'>
                                 olá {props.user} :)
                                 <a onClick={(a) => criarModalUpload(a)} href='#'>postar</a>
+                                <a onClick={(a) => deslogar(a)} href='#'>deslogar</a>
                             </div>
                             :
                             <div className='headerLoginForm'>

@@ -1,8 +1,13 @@
+import {db} from './firebase.js';
+import { useEffect, useState } from 'react';
+
+
 function Post(props){
 
     function comentar(id, e){
         e.preventDefault();
-        alert('comentando no post ' +id);
+        //futuramente, vou substituir isso por um pop-up:
+        alert('comentário feito com sucesso!');
     }
 
     return (
