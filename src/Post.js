@@ -8,6 +8,12 @@ function Post(props){
         e.preventDefault();
 
         let comentarioAtual = document.querySelector('#comentario-'+id).value;
+
+        db.collection('posts').doc(id).collection('comentarios').add({
+          nome:'rebs',
+          comentario: comentarioAtual
+        })
+
         //futuramente, vou substituir isso por um pop-up:
         alert('comentário feito com sucesso!');
         alert(comentarioAtual);
