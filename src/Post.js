@@ -1,6 +1,6 @@
 import {db} from './firebase.js';
 import { useEffect, useState } from 'react';
-
+import {doc, collection, addDoc} from 'firebase/firestore';
 
 function Post(props){
 
@@ -9,10 +9,26 @@ function Post(props){
 
         let comentarioAtual = document.querySelector('#comentario-'+id).value;
 
-        db.collection('posts').doc(id).collection('comentarios').add({
-          nome:'rebs',
+        let postRef = doc(db, 'posts', id);
+        let comentariosRef = collection(postRef, 'comentarios');
+        // let comentariosRef2 = collection(db, referenciaX, 'colecaoQueEuQuero');
+
+        addDoc(comentariosRef, {
+          name: 'rebs',
           comentario: comentarioAtual
-        })
+        });
+
+        //prog que quase deu certo
+        // setDoc(doc(db, 'users/lunewaii/posts'), {
+        //   name: 'rebs',
+        //   comentario: comentarioAtual
+        // });
+
+        //prog versão antiga
+        // db.collection('posts').doc(id).collection('comentarios').add({
+        //   nome:'rebs',
+        //   comentario: comentarioAtual
+        // })
 
         //futuramente, vou substituir isso por um pop-up:
         alert('comentário feito com sucesso!');
