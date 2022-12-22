@@ -15,7 +15,7 @@ function Post(props){
               <img key={props.id} src={props.info.image}/>
               <p key={props.id}>{props.info.username}: {props.info.legenda}</p>
               <form onSubmit={(e)=>comentar(props.id,e)}>
-                <textarea></textarea>
+                <textarea id={"comentario-"+props.id}></textarea>
                 <input type="submit" value="Comentar"/>
               </form>
             </div>
