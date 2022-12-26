@@ -1,9 +1,9 @@
 import { FirebaseError } from 'firebase/app';
 import { ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc, CollectionReference, doc, Firestore, setDoc} from "firebase/firestore"; 
+import { collection, addDoc, CollectionReference, doc, Firestore, setDoc } from "firebase/firestore";
 import React, { useState, useEffect } from 'react';
-import { getFirestore , Timestamp, serverTimestamp } from 'firebase/firestore';
+import { getFirestore, Timestamp, serverTimestamp } from 'firebase/firestore';
 import { auth, createUserWithEmailAndPassword, updateProfile, storage, db } from './firebase';
 import 'firebase/storage';
 
@@ -13,7 +13,7 @@ function Header(props) {
 
     }, [])
 
-    const [file, setFile] = useState(null); 
+    const [file, setFile] = useState(null);
     const [progress, setProgress] = useState(0); //useState que começa em 0
 
     const formHandler = (a) => {
@@ -29,12 +29,12 @@ function Header(props) {
 
         const uploadTask = uploadBytesResumable(storageRef, file);
         // .then((snapshot) => {
-            
+
         //     // console.log(snapshot);
         //     const prog =  Math.round(
         //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         //     setProgress(prog);
-            
+
         // }).catch((ex) => {
         //     console.log(ex);
         // }).finally(() => {
@@ -46,7 +46,7 @@ function Header(props) {
         uploadTask.on(
             "state_changed",
             (snapshot) => {
-                const prog =  Math.round(
+                const prog = Math.round(
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                 setProgress(prog);
             },
@@ -74,7 +74,7 @@ function Header(props) {
             }
         )
     }
-    
+
     function criarConta(a) {
         a.preventDefault();
 
@@ -116,7 +116,7 @@ function Header(props) {
                 const user = userCredential.user;
                 props.setUser(user.displayName);
                 alert('logado com sucesso!');
-                window.location.href= "/";
+                window.location.href = "/";
             }).catch((erro) => {
                 let { message, code } = erro;
 
@@ -138,11 +138,11 @@ function Header(props) {
             })
     }
 
-    function deslogar(a){
+    function deslogar(a) {
         a.preventDefault();
-        auth.signOut().then(function(val){
+        auth.signOut().then(function (val) {
             props.setUser(null);
-            window.location.href= "/";
+            window.location.href = "/";
         })
     }
 
