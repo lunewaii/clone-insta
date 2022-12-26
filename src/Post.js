@@ -4,7 +4,9 @@ import { doc, collection, addDoc } from 'firebase/firestore';
 
 function Post(props) {
 
-
+  useEffect( () => {
+      
+  }, [])
 
   function comentar(id, e) {
     e.preventDefault();
