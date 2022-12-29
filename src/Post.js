@@ -4,15 +4,39 @@ import { doc, collection, addDoc } from 'firebase/firestore';
 
 function Post(props) {
 
+  const [comentarios, setComentarios] = useState(null);
+
   useEffect( () => {
-      
+
+    db.collection('posts').doc(props.id).collection('comentarios').onSnapshot(function(snapshot){
+      setComentarios(snapshot.docs.map(function(document){
+        return {id:document.id,info:document.data()}
+      }))
+    })
+
+    // let comentRef = doc(db, 'posts', id);
+    // let q = query(comentRef, collection(comentRef, 'comentarios'));
+
+    // getDocs(q).then((docs) => {
+    //   setComentarios(docs.docs.map((doc) => {
+    //     return {
+    //       id: doc.id,
+    //       info: doc.data()
+    //     };
+    //   }));
+    // }).catch((ex) => {
+    //   console.log(ex);
+    // }).finally(() => {
+    //   console.log("executou");
+    // });
+
   }, [])
 
   function comentar(id, e) {
     e.preventDefault();
 
     let comentarioAtual = document.querySelector('#comentario-' + id).value;
-
+                                                                                                                   
     let postRef = doc(db, 'posts', id);
     let comentariosRef = collection(postRef, 'comentarios');
     // let comentariosRef2 = collection(db, referenciaX, 'colecaoQueEuQuero');
