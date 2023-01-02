@@ -8,6 +8,7 @@ function Post(props) {
 
   useEffect( () => {
 
+    // programação antiga, que estou tentando entender como passar pra nova forma:
     db.collection('posts').doc(props.id).collection('comentarios').onSnapshot(function(snapshot){
       setComentarios(snapshot.docs.map(function(document){
         return {id:document.id,info:document.data()}
