@@ -9,15 +9,12 @@ function Post(props) {
 
   useEffect(() => {
 
-    // programação antiga, que estou tentando entender como passar pra nova forma:
+    // programação antiga, que passei pra nova forma:
     // db.collection('posts').doc(props.id).collection('comentarios').onSnapshot(function(snapshot){
     //   setComentarios(snapshot.docs.map(function(document){
     //     return {id:document.id,info:document.data()}
     //   }))
     // })
-
-    // let comentRef = doc(db, 'posts', id);
-    // let q = query(comentRef, collection(comentRef, 'comentarios'));
 
     let comRef = collection(db, 'comentarios');
     let q = query(comRef, orderBy('timestamp', 'desc'));
