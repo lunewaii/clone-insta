@@ -6,7 +6,7 @@ function Post(props) {
 
   const [comentarios, setComentarios] = useState(null);
 
-  useEffect( () => {
+  useEffect(() => {
 
     // programação antiga, que estou tentando entender como passar pra nova forma:
     // db.collection('posts').doc(props.id).collection('comentarios').onSnapshot(function(snapshot){
@@ -40,7 +40,7 @@ function Post(props) {
     e.preventDefault();
 
     let comentarioAtual = document.querySelector('#comentario-' + id).value;
-                                                                                                                   
+
     let postRef = doc(db, 'posts', id);
     let comentariosRef = collection(postRef, 'comentarios');
     // let comentariosRef2 = collection(db, referenciaX, 'colecaoQueEuQuero');
