@@ -9,27 +9,30 @@ function Post(props) {
   useEffect( () => {
 
     // programação antiga, que estou tentando entender como passar pra nova forma:
-    db.collection('posts').doc(props.id).collection('comentarios').onSnapshot(function(snapshot){
-      setComentarios(snapshot.docs.map(function(document){
-        return {id:document.id,info:document.data()}
-      }))
-    })
+    // db.collection('posts').doc(props.id).collection('comentarios').onSnapshot(function(snapshot){
+    //   setComentarios(snapshot.docs.map(function(document){
+    //     return {id:document.id,info:document.data()}
+    //   }))
+    // })
 
     // let comentRef = doc(db, 'posts', id);
     // let q = query(comentRef, collection(comentRef, 'comentarios'));
 
-    // getDocs(q).then((docs) => {
-    //   setComentarios(docs.docs.map((doc) => {
-    //     return {
-    //       id: doc.id,
-    //       info: doc.data()
-    //     };
-    //   }));
-    // }).catch((ex) => {
-    //   console.log(ex);
-    // }).finally(() => {
-    //   console.log("executou");
-    // });
+    let comRef = collection(db, 'comentarios');
+    let q = query(comRef, orderBy('timestamp', 'desc'));
+
+    getDocs(q).then((docs) => {
+      setComentarios(docs.docs.map((doc) => {
+        return {
+          id: doc.id,
+          info: doc.data()
+        };
+      }));
+    }).catch((ex) => {
+      console.log(ex);
+    }).finally(() => {
+      console.log("executou");
+    });
 
   }, [])
 
