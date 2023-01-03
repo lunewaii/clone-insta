@@ -53,7 +53,7 @@ function App() {
         posts.map(function(val){
 
           return (
-            <Post user={user} info={val.info} id={val.id} />
+            <Post user={user} info={val.info} id={val.id} key={val.id}/>
           )
 
         })

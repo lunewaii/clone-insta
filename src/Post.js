@@ -1,11 +1,11 @@
 import { db } from './firebase.js';
 import { useEffect, useState } from 'react';
 import { doc, addDoc } from 'firebase/firestore';
-import { collection, CollectionReference, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, CollectionReference, getDocs, getDoc, orderBy, query } from 'firebase/firestore';
 
-function Post(props) {
+function Post(props){
 
-  const [comentarios, setComentarios] = useState(null);
+  const [comentarios, setComentarios] = useState([]);
 
   useEffect(() => {
 
@@ -16,22 +16,19 @@ function Post(props) {
     //   }))
     // })
 
-    let comRef = collection(db, 'comentarios');
-    let q = query(comRef, orderBy('timestamp', 'desc'));
+    let comentRef = collection(db, 'posts', props.id, 'comentarios');
+    let q = query(comentRef);
 
-    getDocs(q).then((docs) => {
-      setComentarios(docs.docs.map((doc) => {
+    getDocs(q).then((queryResult) => {
+      setComentarios(queryResult.docs.map((doc) => {
         return {
           id: doc.id,
-          info: doc.data()
-        };
+          name: doc.data().name,
+          comentario: doc.data().comentario
+        }
       }));
-    }).catch((ex) => {
-      console.log(ex);
-    }).finally(() => {
-      console.log("executou");
     });
-
+    
   }, [])
 
   function comentar(id, e) {
@@ -68,8 +65,19 @@ function Post(props) {
 
   return (
     <div className='postsLegImg'>
-      <img key={props.id} src={props.info.image} />
-      <p key={props.id}>{props.info.username}: {props.info.legenda}</p>
+      <img src={props.info.image} />
+      <p>{props.info.username}: {props.info.legenda}</p>
+
+    <div className='coments'>
+    {
+      comentarios.map((val) => {
+        return(
+          <div key={val.id}>{val.name}: {val.comentario}</div>
+        )
+      })
+    }
+    </div>
+
       <form onSubmit={(e) => comentar(props.id, e)}>
         <textarea id={"comentario-" + props.id}></textarea>
         <input type="submit" value="Comentar" />
