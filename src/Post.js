@@ -1,6 +1,7 @@
 import { db } from './firebase.js';
 import { useEffect, useState } from 'react';
-import { doc, collection, addDoc } from 'firebase/firestore';
+import { doc, addDoc } from 'firebase/firestore';
+import { collection, CollectionReference, getDocs, orderBy, query } from 'firebase/firestore';
 
 function Post(props) {
 
