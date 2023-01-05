@@ -23,7 +23,9 @@ function App() {
   useEffect(() => {
 
     auth.onAuthStateChanged(function(val){
-      setUser(val.displayName);
+      if (val != null){
+        setUser(val.displayName);
+      }
     })
 
     let postRef = collection(db, 'posts');
