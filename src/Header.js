@@ -52,6 +52,7 @@ function Header(props) {
             },
             (error) => console.log(error),
             () => {
+                //está dando erro com imagens .jpg
                 getDownloadURL(storageRef).then((url) => {
                     console.log(url);
                     // novo
