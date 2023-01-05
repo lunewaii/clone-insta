@@ -1,7 +1,7 @@
 import { db } from './firebase.js';
 import { useEffect, useState } from 'react';
 import { doc, addDoc } from 'firebase/firestore';
-import { collection, CollectionReference, getDocs, getDoc, orderBy, query } from 'firebase/firestore';
+import { collection, CollectionReference, getDocs, getDoc, orderBy, query, serverTimestamp } from 'firebase/firestore';
 
 function Post(props){
 
@@ -42,7 +42,8 @@ function Post(props){
 
     addDoc(comentariosRef, {
       name: props.user,
-      comentario: comentarioAtual
+      comentario: comentarioAtual,
+      timestamp: serverTimestamp()
     });
 
     //prog que quase deu certo
