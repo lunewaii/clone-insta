@@ -29,6 +29,7 @@ function Header(props) {
 
         const uploadTask = uploadBytesResumable(storageRef, file);
         // .then((snapshot) => {
+        //tentativa
 
         //     // console.log(snapshot);
         //     const prog =  Math.round(
