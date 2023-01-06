@@ -209,8 +209,9 @@ body {
 }
 
 .postsLegImg p {
-    padding: 10px;
+    padding: 8px;
     border-left: solid #5e548ec8;
+    font-weight: bold;
 }
 
 .postsLegImg form {
@@ -235,8 +236,16 @@ body {
 }
 
 .postsLegImg textarea {
+    outline: none;
     height: 80px;
     border-radius: 5px;
     border: solid 1px #5e548e;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.coments {
+    padding: 8px;
+    /* cor importante pra salvar: */
+    border-left: solid #d02f87b7;
+    color: #4512b2;
 }

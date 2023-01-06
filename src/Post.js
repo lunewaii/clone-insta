@@ -79,10 +79,16 @@ function Post(props){
     }
     </div>
 
+      {
+        (props.user)?
       <form onSubmit={(e) => comentar(props.id, e)}>
         <textarea id={"comentario-" + props.id}></textarea>
         <input type="submit" value="Comentar" />
       </form>
+      :
+      <div></div>
+      }
+
     </div>
   )
 
