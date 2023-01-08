@@ -218,7 +218,7 @@ function Header(props) {
                         // isso pode ser testado mudando o useState(null) para qualquer coisa (entre `` ou "")
                         (props.user) ?
                             <div className='header_logado'>
-                                olá {props.user} :)
+                                olá {props.user}
                                 <a onClick={(a) => criarModalUpload(a)} href='#'>postar</a>
                                 <a onClick={(a) => deslogar(a)} href='#'>deslogar</a>
                             </div>
