@@ -1,6 +1,6 @@
 import { db } from './firebase.js';
 import { useEffect, useState } from 'react';
-import { doc, addDoc } from 'firebase/firestore';
+import { doc, addDoc, onSnapshot } from 'firebase/firestore';
 import { collection, CollectionReference, getDocs, getDoc, orderBy, query, serverTimestamp } from 'firebase/firestore';
 
 function Post(props){
@@ -8,7 +8,7 @@ function Post(props){
   const [comentarios, setComentarios] = useState([]);
 
   useEffect(() => {
-
+    console.log("render");
     // programação antiga, que passei pra nova forma:
     // db.collection('posts').doc(props.id).collection('comentarios').onSnapshot(function(snapshot){
     //   setComentarios(snapshot.docs.map(function(document){
@@ -19,7 +19,7 @@ function Post(props){
     let comentRef = collection(db, 'posts', props.id, 'comentarios');
     let q = query(comentRef);
 
-    getDocs(q).then((queryResult) => {
+    onSnapshot(q, (queryResult) => {
       setComentarios(queryResult.docs.map((doc) => {
         return {
           id: doc.id,
@@ -29,7 +29,17 @@ function Post(props){
       }));
     });
     
-  }, [])
+    /*getDocs(q).then((queryResult) => {
+      setComentarios(queryResult.docs.map((doc) => {
+        return {
+          id: doc.id,
+          name: doc.data().name,
+          comentario: doc.data().comentario
+        }
+      }));
+    });*/
+    
+  }, []);
 
   function comentar(id, e) {
     e.preventDefault();

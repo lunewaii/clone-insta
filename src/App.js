@@ -6,7 +6,7 @@ import { db, auth } from './firebase';
 import userEvent from '@testing-library/user-event';
 import Post from './Post';
 
-import { collection, CollectionReference, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, CollectionReference, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
 
 function App() {
 
@@ -26,22 +26,18 @@ function App() {
       if (val != null){
         setUser(val.displayName);
       }
-    })
+    });
 
     let postRef = collection(db, 'posts');
     let q = query(postRef, orderBy('timestamp', 'desc'));
 
-    getDocs(q).then((docs) => {
+    onSnapshot(q, (docs) => {
       setPosts(docs.docs.map((doc) => {
         return {
           id: doc.id,
           info: doc.data()
         };
       }));
-    }).catch((ex) => {
-      console.log(ex);
-    }).finally(() => {
-      console.log("executou");
     });
 
   }, [ ]);
