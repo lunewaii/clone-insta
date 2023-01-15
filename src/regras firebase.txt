@@ -1,0 +1,33 @@
+estou tentando arrumar isso tudo e entender o que está acontecendo ainda ._.
+
+firestore database:
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+   
+   match /posts/{id} {
+   allow read: if true;
+   allow write: if request.auth.token != null;
+   }
+   
+   match /posts/{id}/comentarios/{comentId} {
+// coloquei allow read e write if true pra conseguir comentar estando logado.
+   allow read: if true;
+// allow write: if request.auth.token != null && request.auth.token.name == request.resource.data.nome;
+   }
+   
+  }
+  
+}
+
+storage:
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+    	allow read, write: if true;
+    }
+  }
+}
