@@ -1,5 +1,5 @@
 # Clone Instagram
-Esse é meu primeiro projeto usando React. Vou desenvolvendo e aprendendo junto!
+Esse foi o primeiro projeto que desenvolvi com react e também com firebase. Passei muitas horas tentando entender a documentação (e no stackoverflow também rs). Estou muito feliz agora que terminei, porém parece errado criar um novo folder e trabalhar em um novo projeto agora :(
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
