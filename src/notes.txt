@@ -46,3 +46,27 @@ const [progress, setProgress] = useState(0); //useState que começa em 0
 
 
     <input onChange={(a) => setFile(a.target.files[0])} type='file' name='file' />
+
+
+
+
+
+
+    i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+
+? Allow Firebase to collect CLI and Emulator Suite usage and error reporting information? Yes
+i  To change your data collection preference at any time, run `firebase logout` and log in again.
+
+Visit this URL on this device to log in:
+https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=115757865&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+
+Waiting for authentication...
+
++  Success! Logged in as rebecacarneiropaulaoficial@gmail.comfirebase init
+
+
+
+
+
+Project Console: https://console.firebase.google.com/project/clone-insta-novo-9ea46/overview
+Hosting URL: https://clone-insta-novo-9ea46.web.app
