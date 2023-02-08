@@ -227,7 +227,7 @@ function Header(props) {
                                 <form onSubmit={(a) => logar(a)}>
                                     <input id='email-login' type='text' placeholder='email' />
                                     <input id='senha-login' type='password' placeholder='senha' />
-                                    <input type='submit' placeholder='login' />
+                                    <input type='submit' value='login' />
                                 </form>
                                 <div className='btn_criarConta'>
                                     <a onClick={(a) => abrirModalCreate(a)} href='#'>Criar conta</a>
